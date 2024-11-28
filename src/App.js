@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Weather from "./pages/weather";
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes
+} from "react-router-dom";
+import SearchBar from "./components/searchbar";
+import {useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    const [search, setSearch] = useState("");
+
+  return(
+      <Router>
+          <SearchBar search = {search} setSearch={setSearch} />
+        <Routes>
+          <Route exact path="/" element={<Weather city={search} />} />
+        </Routes>
+      </Router>
   );
 }
 
